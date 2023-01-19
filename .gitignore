@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Gimp
+*.xcf
+*.xcf.meta
+
+LICENSE.meta
+README.md.meta
