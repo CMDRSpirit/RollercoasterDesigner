@@ -4,7 +4,7 @@
 A toolset for creating and operating realistic rollercoasters in Unity. Includes a full integration into the Unity Editor.
 
 ## What this is not
-- A replacement for more professional software, like No limits 2. The current physical simulation is very simple, but works for games and other applications.
+- A replacement for more professional software, like NoLimits 2. The current physical simulation is very simple, but works for games and other applications.
 - It not a standalone coaster editor for games, but it includes one for the Unity Editor to be simulated in standalone mode.
 - Apart from example assets, there are no tracks or cars being delivered (for the moment). This is up to you to model your custom cars, tracks and scenery.
 
