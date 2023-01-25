@@ -1,4 +1,5 @@
-﻿# Rollercoaster Designer v1.0
+﻿
+# Rollercoaster Designer v1.0
 ![Title](https://user-images.githubusercontent.com/33422437/214536005-8d2a673f-a1f5-427e-b0a1-c42204592086.png)
 
 A toolset for creating and operating realistic rollercoasters in Unity. Includes a full integration into the Unity Editor.
@@ -9,7 +10,7 @@ A toolset for creating and operating realistic rollercoasters in Unity. Includes
 - Apart from example assets, there are no tracks or cars being delivered (for the moment). This is up to you to model your custom cars, tracks and scenery.
 
 ## Wiki
-The Wiki contains a lot of information about how the system works and how to build a simple rollercoaster.
+The Wiki contains information about how the toolset works and how to build a simple rollercoaster.
 
 ## Features
 - Spline based track editor
@@ -30,6 +31,8 @@ The Wiki contains a lot of information about how the system works and how to bui
 ## Requirements
 - Unity 2022.1+
 - Unity.Mathematics 1.2.x+
-- Unity.Cinemachine 2.8.x (Only used by the example scene)
+- Unity.Cinemachine 2.8.x+ (Only used by the example scene)
+- HDRP 13+ (Only used by example materials)
 
 Older version should also work, I just didn't test it.
+
