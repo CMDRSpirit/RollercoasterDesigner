@@ -46,6 +46,8 @@ namespace Rollercoaster
         public new void Start()
         {
             base.Start();
+
+            StationSections[0].StopTrain = false;
         }
 
         private void activateSection(BlockSection sec)
@@ -67,7 +69,8 @@ namespace Rollercoaster
             activateSection(section);
 
             //Update previous
-            activateSection(section.Prev.Prev);
+            if(section.Prev != null)
+                activateSection(section.Prev.Prev);
         }
 
         public override void OnEventTrigger(SensorEvent e)

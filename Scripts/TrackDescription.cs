@@ -38,6 +38,7 @@ namespace Rollercoaster
 
         //Graphics
         public Mesh TrackMesh;
+        public float MeshLength = 1;
 
         [ColorUsage(false, false)]
         public Color TrackGizmoColor = Color.green;
@@ -74,7 +75,7 @@ namespace Rollercoaster
 
 
             float secLength = section.SplineLength;
-            float baseLength = 1;
+            float baseLength = MeshLength;
             int iterations = (int)(secLength / baseLength);
             float scale = secLength / (baseLength * iterations);
 
@@ -122,6 +123,7 @@ namespace Rollercoaster
             MeshFilter filter = trackMeshObj.AddComponent<MeshFilter>();
             Mesh mesh = new Mesh();
             mesh.name = "mesh_" + section.name;
+            mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;//TODO switch to multiple meshs
 
             mesh.SetVertices(verts);
             mesh.SetNormals(norms);

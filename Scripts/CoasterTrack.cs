@@ -156,7 +156,7 @@ namespace Rollercoaster
         }
 
 
-        public void AddSection()
+        public TrackSection AddSection(int index = -1)
         {
             GameObject obj = new GameObject("TrackSection_" + TrackSections.Count);
             obj.transform.parent = this.transform;
@@ -176,9 +176,14 @@ namespace Rollercoaster
 
             Undo.RegisterCreatedObjectUndo(obj, "Create Track Section");
 
-            TrackSections.Add(sec);
+            if (index != -1)
+                TrackSections.Insert(index, sec);
+            else
+                TrackSections.Add(sec);
 
             CombineSections();
+
+            return sec;
         }
 
         public void RemoveSection(int index)
@@ -188,6 +193,53 @@ namespace Rollercoaster
 
             Undo.RecordObject(this, "Remove Track Section");
             TrackSections.RemoveAt(index);
+
+            CombineSections();
+        }
+
+        public void SplitSection(TrackSection sec, int nodeIndex)
+        {
+            float3 slope = sec.EvaluateDerivative(nodeIndex);
+            float roll = sec.EvaluateRoll(nodeIndex);
+
+            var np = sec.NodesPosition;
+            var nr = sec.NodesRoll;
+
+            var np1 = np.GetRange(nodeIndex, np.Count - nodeIndex);
+            for (int i = 0; i < np1.Count; ++i)
+                np1[i] = (float3)sec.transform.TransformPoint(np1[i]) - (float3)sec.transform.TransformPoint(sec.NodesPosition[nodeIndex]);
+
+            var nr1 = new List<float2>();
+            foreach(var r in nr)
+            {
+                if (r.x >= nodeIndex)
+                    nr1.Add(float2(r.x - nodeIndex, r.y));
+            }
+            if(nr1.Count == 0 || nr1[0].x != 0)
+                nr1.Insert(0, float2(0, roll));
+
+            var nr2 = new List<float2>();
+            foreach (var r in nr)
+            {
+                if (r.x < nodeIndex)
+                    nr2.Add(r);
+            }
+            if (nr2.Count == 0 || nr2[nr2.Count - 1].x != nodeIndex)
+                nr2.Add(float2(nodeIndex, roll));
+
+            //
+            sec.NodesPosition = np.GetRange(0, nodeIndex + 1);
+            sec.NodesRoll = nr2;
+            sec.EndSlope = slope;
+
+            //
+            int secidx = TrackSections.IndexOf(sec);
+            var sec1 = AddSection(secidx + 1);
+
+            sec1.NodesPosition = np1;
+            sec1.NodesRoll = nr1;
+            sec1.StartSlope = slope;
+            sec1.UpdateSpline();
 
             CombineSections();
         }

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeartlineOffset: 0.75
   TrackWidth: 0.823
-  CanBrakeTrain: 1
   TrackMesh: {fileID: 3946459253482766402, guid: 34fcf293d4ed4524182a5e9c3808ab56, type: 3}
   TrackGizmoColor: {r: 1, g: 0.21692765, b: 0, a: 1}
   TrackObjects:

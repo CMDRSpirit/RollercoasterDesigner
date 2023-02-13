@@ -148,7 +148,8 @@ namespace Rollercoaster
         public virtual void OnTrainEnterSection(BlockSection section)
         {
             section.free = false;
-            section.Prev.free = true;
+            if(section.Prev != null)
+                section.Prev.free = true;
         }
 
         public abstract void OnEventTrigger(SensorEvent e);
@@ -196,6 +197,34 @@ namespace Rollercoaster
     [CustomEditor(typeof(ATrackController), true)]
     public class TrackControllerEditor : Editor
     {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            ATrackController con = (ATrackController)target;
+
+            if(GUILayout.Button("Auto place sensor events"))
+            {
+                if (con.sensorEvents == null)
+                    con.sensorEvents = new List<ATrackController.SensorEvent>();
+
+                foreach(var bs in con.BlockSections)
+                {
+                    var entry = new ATrackController.SensorEvent();
+                    entry.eventType = ATrackController.SensorEventType.TRAIN_ENTER;
+                    entry.t = con.track.GetTStart(bs.getFirst()) + 0.25f;
+
+                    con.sensorEvents.Add(entry);
+
+                    entry = new ATrackController.SensorEvent();
+                    entry.eventType = ATrackController.SensorEventType.BLOCK_CHECK;
+                    entry.t = con.track.GetTStart(bs.getLast()) + bs.getLast().getTMax() - 0.25f;
+
+                    con.sensorEvents.Add(entry);
+                }
+            }
+        }
+
         private void OnSceneGUI()
         {
             ATrackController con = (ATrackController) target;

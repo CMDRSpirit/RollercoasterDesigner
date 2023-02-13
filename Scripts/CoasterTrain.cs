@@ -77,7 +77,7 @@ namespace Rollercoaster
 
                 //roll resistance
                 float NForce = dot(axis.transform.up, new float3(0, 1, 0)) * 9.81f;
-                velocity += -sign(velocity) * this.RollCoefficient * NForce * delta  * massCorrection;
+                velocity += -sign(velocity) * this.RollCoefficient * NForce * delta * massCorrection;
             }
 
             //Section
@@ -147,7 +147,7 @@ namespace Rollercoaster
 
                     float tOld = t_global;
                     t_global += velocity * Time.deltaTime / length(der);
-                    trackController.TriggerEvents(tOld, t_global);
+                    trackController?.TriggerEvents(tOld, t_global);
                     //
                 }
 

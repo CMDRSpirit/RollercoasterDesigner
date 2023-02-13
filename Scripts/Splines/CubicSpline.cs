@@ -47,7 +47,7 @@ namespace Rollercoaster
 	/// You must provide points in X sort order.
 	/// </para>
 	/// </remarks>
-	public class CubicSpline
+	public class CubicSpline : ASpline
 	{
 		#region Fields
 
@@ -137,37 +137,53 @@ namespace Rollercoaster
 
 		#region Fit*
 
-		/// <summary>
-		/// Fit x,y and then eval at points xs and return the corresponding y's.
-		/// This does the "natural spline" style for ends.
-		/// This can extrapolate off the ends of the splines.
-		/// You must provide points in X sort order.
-		/// </summary>
-		/// <param name="x">Input. X coordinates to fit.</param>
-		/// <param name="y">Input. Y coordinates to fit.</param>
-		/// <param name="xs">Input. X coordinates to evaluate the fitted curve at.</param>
-		/// <param name="startSlope">Optional slope constraint for the first point. Single.NaN means no constraint.</param>
-		/// <param name="endSlope">Optional slope constraint for the final point. Single.NaN means no constraint.</param>
-		/// <param name="debug">Turn on console output. Default is false.</param>
-		/// <returns>The computed y values for each xs.</returns>
-		public float[] FitAndEval(float[] x, float[] y, float[] xs, float startSlope = float.NaN, float endSlope = float.NaN, bool debug = false)
+
+		public override void Fit(float[] x, float[] y, float startSlope = float.NaN, float endSlope = float.NaN)
+		{
+			this.Fit(x, y, startSlope, endSlope);
+		}
+
+        public override float Eval(float x)
+        {
+			return this.Eval(new float[] { x })[0];
+        }
+
+        public override float EvalSlope(float x)
+        {
+			return this.EvalSlope(new float[] { x })[0];
+        }
+
+        /// <summary>
+        /// Fit x,y and then eval at points xs and return the corresponding y's.
+        /// This does the "natural spline" style for ends.
+        /// This can extrapolate off the ends of the splines.
+        /// You must provide points in X sort order.
+        /// </summary>
+        /// <param name="x">Input. X coordinates to fit.</param>
+        /// <param name="y">Input. Y coordinates to fit.</param>
+        /// <param name="xs">Input. X coordinates to evaluate the fitted curve at.</param>
+        /// <param name="startSlope">Optional slope constraint for the first point. Single.NaN means no constraint.</param>
+        /// <param name="endSlope">Optional slope constraint for the final point. Single.NaN means no constraint.</param>
+        /// <param name="debug">Turn on console output. Default is false.</param>
+        /// <returns>The computed y values for each xs.</returns>
+        public float[] FitAndEval(float[] x, float[] y, float[] xs, float startSlope = float.NaN, float endSlope = float.NaN, bool debug = false)
 		{
 			Fit(x, y, startSlope, endSlope, debug);
 			return Eval(xs, debug);
 		}
 
-		/// <summary>
-		/// Compute spline coefficients for the specified x,y points.
-		/// This does the "natural spline" style for ends.
-		/// This can extrapolate off the ends of the splines.
-		/// You must provide points in X sort order.
-		/// </summary>
-		/// <param name="x">Input. X coordinates to fit.</param>
-		/// <param name="y">Input. Y coordinates to fit.</param>
-		/// <param name="startSlope">Optional slope constraint for the first point. Single.NaN means no constraint.</param>
-		/// <param name="endSlope">Optional slope constraint for the final point. Single.NaN means no constraint.</param>
-		/// <param name="debug">Turn on console output. Default is false.</param>
-		public void Fit(float[] x, float[] y, float startSlope = float.NaN, float endSlope = float.NaN, bool debug = false)
+        /// <summary>
+        /// Compute spline coefficients for the specified x,y points.
+        /// This does the "natural spline" style for ends.
+        /// This can extrapolate off the ends of the splines.
+        /// You must provide points in X sort order.
+        /// </summary>
+        /// <param name="x">Input. X coordinates to fit.</param>
+        /// <param name="y">Input. Y coordinates to fit.</param>
+        /// <param name="startSlope">Optional slope constraint for the first point. Single.NaN means no constraint.</param>
+        /// <param name="endSlope">Optional slope constraint for the final point. Single.NaN means no constraint.</param>
+        /// <param name="debug">Turn on console output. Default is false.</param>
+        public void Fit(float[] x, float[] y, float startSlope = float.NaN, float endSlope = float.NaN, bool debug = false)
 		{
 			if (Single.IsInfinity(startSlope) || Single.IsInfinity(endSlope))
 			{
