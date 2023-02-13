@@ -396,11 +396,37 @@ namespace Rollercoaster
 
         private static bool axisGlobal, axisVisible = true, buttonsVisible = true, splitSectionMode = false;
 
+        private const float MouseDistThreshhold = 10;
+        private Ray mouseRay;
+
+        private bool mouseDown;
+
+        private float distanceToRay(float3 posWS, Ray ray)
+        {
+            return length(cross(ray.direction, posWS - (float3)ray.origin));
+        }
+
+        private void drawWireSphere(float3 pos, float scale, Color col)
+        {
+            Handles.color = col;
+            Handles.DrawWireDisc(pos, Vector3.forward, scale);
+            Handles.DrawWireDisc(pos, Vector3.right, scale);
+        }
+
         private void OnSceneGUI()
         {
             TrackSection track = (TrackSection)target;
             if (!track.TrackDesc)
                 return;
+
+            if (Event.current.type == EventType.MouseDown)
+                mouseDown = true;
+            else if (Event.current.type == EventType.MouseUp)
+                mouseDown = false;
+
+            if (Event.current.type == EventType.Layout && !mouseDown)
+                mouseRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+
 
             Handles.matrix = track.transform.localToWorldMatrix;
             EditorGUI.BeginChangeCheck();
@@ -438,6 +464,11 @@ namespace Rollercoaster
             for (int i = 0; i < track.NodesPosition.Count; ++i)
             {
                 var node = track.NodesPosition[i];
+                if (distanceToRay(track.transform.TransformPoint(node), mouseRay) > MouseDistThreshhold)
+                {
+                    drawWireSphere(node, 0.5f, Color.green);
+                    continue;
+                }
 
                 float3 der = track.EvaluateDerivative(i);
                 float3 forward = math.normalize(der);
@@ -525,6 +556,13 @@ namespace Rollercoaster
                 float3 p;
                 quaternion r;
                 track.EvaluateSpline(rollNode.x, out p, out r);
+
+                if (distanceToRay(track.transform.TransformPoint(p), mouseRay) > MouseDistThreshhold)
+                {
+                    drawWireSphere(p, 0.5f, Color.white);
+                    continue;
+                }
+
                 float3 der = track.EvaluateDerivative(rollNode.x);
                 float3 forward = math.normalize(der);
 
