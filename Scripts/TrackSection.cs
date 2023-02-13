@@ -246,6 +246,9 @@ namespace Rollercoaster
 
         public float3 EvaluateOrthogonal(float t, RollType rollType)//Right vector
         {
+            if (t < NodesRoll[0].x || t > NodesRoll[NodesRoll.Count - 1].x)
+                rollType = RollType.ANGLE;
+
             if (rollType == RollType.ANGLE)
             {
                 float3 forward = math.normalize(EvaluateDerivative(t));
@@ -258,8 +261,6 @@ namespace Rollercoaster
             {
                 if (!IsFitted || splineRX == null)
                     return float3(1, 0, 0);
-
-                t = clamp(t, NodesRoll[0].x, NodesRoll[NodesRoll.Count - 1].x);
 
                 return float3(splineRX.Eval(t), splineRY.Eval(t), splineRZ.Eval(t));
             }

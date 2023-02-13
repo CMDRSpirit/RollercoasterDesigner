@@ -235,6 +235,7 @@ namespace Rollercoaster
             //
             int secidx = TrackSections.IndexOf(sec);
             var sec1 = AddSection(secidx + 1);
+            sec1.splineType = sec.splineType;
 
             sec1.NodesPosition = np1;
             sec1.NodesRoll = nr1;
