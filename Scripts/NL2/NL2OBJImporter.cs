@@ -122,7 +122,7 @@ namespace Rollercoaster
                 float3 up = nodes_up[i];
 
                 float3 baseF = normalize(section.EvaluateDerivative(i));
-                float3 baseR = normalize(section.EvaluateOrthogonal(i));
+                float3 baseR = normalize(section.EvaluateOrthogonal(i, TrackSection.RollType.ANGLE));
                 float3 baseU = section.EvaluateUp(baseF, baseR);
 
                 Quaternion rot = Quaternion.Inverse(Quaternion.LookRotation(baseF, baseU));

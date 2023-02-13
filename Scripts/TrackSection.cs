@@ -41,6 +41,11 @@ namespace Rollercoaster
         {
             CUBIC, NURBS
         }
+        [System.Serializable]
+        public enum RollType
+        {
+            ANGLE, VECTOR
+        }
 
         public TrackDescription TrackDesc;
         public Material TrackMaterial;
@@ -172,7 +177,7 @@ namespace Rollercoaster
             for (int i = 0; i < trs.Length; ++i)
             {
                 float tr = NodesRoll[i].x;
-                float3 r = EvaluateOrthogonal(tr, true);
+                float3 r = EvaluateOrthogonal(tr, RollType.ANGLE);
                 rxs[i] = r.x;
                 rys[i] = r.y;
                 rzs[i] = r.z;
@@ -239,9 +244,9 @@ namespace Rollercoaster
             return float3(splineX.EvalSlope(t), splineY.EvalSlope(t), splineZ.EvalSlope(t));
         }
 
-        public float3 EvaluateOrthogonal(float t, bool useRoll = true)//Right vector
+        public float3 EvaluateOrthogonal(float t, RollType rollType)//Right vector
         {
-            if (useRoll)
+            if (rollType == RollType.ANGLE)
             {
                 float3 forward = math.normalize(EvaluateDerivative(t));
                 float roll = EvaluateRoll(t);
@@ -276,7 +281,7 @@ namespace Rollercoaster
         {
             float3 pos = EvaluatePosition(t);
             float3 forward = EvaluateDerivative(t);
-            float3 right = EvaluateOrthogonal(t, false);
+            float3 right = EvaluateOrthogonal(t, RollType.VECTOR);
             float3 up = EvaluateUp(forward, right);
 
             position = pos - up * TrackDesc.HeartlineOffset;
