@@ -228,7 +228,7 @@ namespace Rollercoaster
         {
             if (!IsFitted || splineX == null)
                 return 0;
-            return new float3(splineX.Eval(t), splineY.Eval(t), splineZ.Eval(t));
+            return float3(splineX.Eval(t), splineY.Eval(t), splineZ.Eval(t));
         }
 
         public float3 EvaluateDerivative(float t)
@@ -236,7 +236,7 @@ namespace Rollercoaster
             if (!IsFitted || splineX == null)
                 return float3(0, 0, 1);
 
-            return new float3(splineX.EvalSlope(t), splineY.EvalSlope(t), splineZ.EvalSlope(t));
+            return float3(splineX.EvalSlope(t), splineY.EvalSlope(t), splineZ.EvalSlope(t));
         }
 
         public float3 EvaluateOrthogonal(float t, bool useRoll = true)//Right vector
@@ -254,7 +254,9 @@ namespace Rollercoaster
                 if (!IsFitted || splineRX == null)
                     return float3(1, 0, 0);
 
-                return new float3(splineRX.Eval(t), splineRY.Eval(t), splineRZ.Eval(t));
+                t = clamp(t, NodesRoll[0].x, NodesRoll[NodesRoll.Count - 1].x);
+
+                return float3(splineRX.Eval(t), splineRY.Eval(t), splineRZ.Eval(t));
             }
         }
 
@@ -549,6 +551,8 @@ namespace Rollercoaster
             int r_modID = -1;
             int r_modType = 0;
             float2 r_value = 0;
+            
+            Handles.color = Color.white;
             for (int i = 0; i < track.NodesRoll.Count; ++i)
             {
                 float2 rollNode = track.NodesRoll[i];
