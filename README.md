@@ -1,6 +1,6 @@
 ﻿
 # Rollercoaster Designer v1.1
-![Title](https://user-images.githubusercontent.com/33422437/214536005-8d2a673f-a1f5-427e-b0a1-c42204592086.png)
+![Title](https://user-images.githubusercontent.com/33422437/218444096-ca4b780b-1ee4-4082-9abc-5f3abd604d0e.png)
 
 A toolset for creating and operating realistic rollercoasters in Unity. Includes a full integration into the Unity Editor.
 
