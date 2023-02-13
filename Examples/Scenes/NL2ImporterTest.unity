@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3947.8071, g: 3669.2747, b: 3821.1846, a: 1}
+  m_IndirectSpecularColor: {r: 3947.8374, g: 3670.732, b: 3827.1475, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1949,7 +1949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3674772831732328169, guid: af9744ebf6642ba46bb2a2675f44c18a, type: 3}
       propertyPath: m_Priority
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3674772831732328169, guid: af9744ebf6642ba46bb2a2675f44c18a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
@@ -6545,7 +6545,7 @@ MonoBehaviour:
   AffectsTrain: 1
   Acceleration: 1
   Breaking: 5
-  TargetVelocity: 2
+  TargetVelocity: 5
   PhysicsActive: 1
   StopTrain: 1
   splineType: 0
@@ -10298,7 +10298,7 @@ MonoBehaviour:
   AffectsTrain: 1
   Acceleration: 1
   Breaking: 5
-  TargetVelocity: 2
+  TargetVelocity: 3
   PhysicsActive: 1
   StopTrain: 1
   splineType: 0
@@ -10579,7 +10579,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 20000
-  field of view: 75
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -10604,8 +10604,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065421698}
-  m_LocalRotation: {x: 0.018198151, y: -0.0019418102, z: -0.000035343277, w: 0.9998326}
-  m_LocalPosition: {x: 9.999321, y: 11.914155, z: -9.824324}
+  m_LocalRotation: {x: 0.01947323, y: -0.95425314, z: 0.062383268, w: 0.2917708}
+  m_LocalPosition: {x: 0.9, y: 1.472, z: 7.038373}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
