@@ -46,10 +46,13 @@ Older versions should also work, I just didn't test it.
 
 ## Changelog
 ### v1.1
-+ NURBS splines
-+ NoLimits 2 track importing
-+ Train and track audio
-+ Track supports generation
+Additions:
+- NURBS splines
+- NoLimits 2 track importing
+- Train and track audio
+- Track supports generation
 
-+ improved editor performance 
-+ Automatic generation of sensor events for block sections
+Improvements:
+- Editor performance 
+- Automatic generation of sensor events for block sections
+- Changed definition of trains using attached scripts instead of structs
