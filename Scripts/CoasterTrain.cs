@@ -37,6 +37,7 @@ namespace Rollercoaster
 
         public bool EnablePhysics;
         public float RollCoefficient;
+        public float CrossArea;
 
 
         public TrainAxis[] AxisDefinitions;
@@ -63,27 +64,38 @@ namespace Rollercoaster
             PlaceTrainOnTrack();            
         }
         
-        private void UpdatePhysics(float delta)
+        private void UpdatePhysics(float deltaT)
         {
             //Physics
-            float massCorrection = 1.0f / AxisDefinitions.Length;
+            float totalMass = 0;
+            float force = 0;
             foreach (TrainAxis axis in AxisDefinitions)
             {
+                const float carMass = 550;
+                totalMass += carMass;
+
                 float3 forward = axis.transform.forward;
                 float fdotUp = -dot(forward, new float3(0, 1, 0));
 
                 float acc = fdotUp * 9.81f;
-                velocity += acc * delta * massCorrection;
+                force += acc * carMass;
 
                 //roll resistance
                 float NForce = dot(axis.transform.up, new float3(0, 1, 0)) * 9.81f;
-                velocity += -sign(velocity) * this.RollCoefficient * NForce * delta * massCorrection;
+                force += -sign(velocity) * this.RollCoefficient * NForce * carMass;
+
+                //Drag
+                const float rho_air = 1.293e-3f; //Density
+                const float c_d = 0.6f;//Drag coefficient
+                float v2 = velocity * velocity;
+                force += -sign(velocity) * 0.5f * rho_air * v2 * c_d * CrossArea;
             }
+            velocity += force * deltaT / totalMass;
 
             //Section
             float t_local;
             var sec = Track.GetSection(t_global, out t_local);
-            sec.AffectTrain(this, delta);
+            sec.AffectTrain(this, deltaT);
         }
         
         public void PlaceTrainOnTrack()

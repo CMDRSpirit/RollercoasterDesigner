@@ -1,6 +1,6 @@
 ﻿
 # Rollercoaster Designer v1.1
-![Title](https://user-images.githubusercontent.com/33422437/218444096-ca4b780b-1ee4-4082-9abc-5f3abd604d0e.png)
+![Title](https://user-images.githubusercontent.com/33422437/228783876-e99047ac-571a-4592-9801-ed93a4c37a73.png)
 
 A toolset for creating and operating realistic rollercoasters in Unity. Includes a full integration into the Unity Editor.
 
@@ -10,7 +10,10 @@ A toolset for creating and operating realistic rollercoasters in Unity. Includes
 - Apart from example assets, there are no tracks or cars being delivered (for the moment). This is up to you to model your custom cars, tracks and scenery.
 
 ## Wiki
-The Wiki contains information about how the toolset works, how to build a simple rollercoaster and importing NoLimits 2 tracks.
+The [Wiki](https://github.com/CMDRSpirit/RollercoasterDesigner/wiki) contains information about how the toolset works, how to build a simple rollercoaster and importing NoLimits 2 tracks.
+
+## Example Coasters
+- Expedition Geforce Recreation (Holiday Park): Coming soon
 
 ## Features
 - Spline based track editor
@@ -19,11 +22,14 @@ The Wiki contains information about how the toolset works, how to build a simple
 - Custom track and car models (Procedural track generation)
 - Block sections for multi train operation
 - On track event triggering
+- Train and track audio (WIP)
+- Track supports generation (WIP)
+- Physics model (Rolling / Air resistance)
 - Full integration into Unity (Terrain system, programming, HDRP / URP, ...)
 - Superior graphics capabilities compared to other coaster simulators (Baked Lighting, GI, Ray Tracing (HDRP), ...)
 
 ## Future work
-- Improved physics
+- Improved physics and audio
 - Better spline handling (Position nodes not always 1t apart)
 - Lightmap integration for track pieces (For now use light probes or [Probe Volumes](https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@14.0/manual/probevolumes.html))
 - Track support generation
@@ -37,3 +43,13 @@ The Wiki contains information about how the toolset works, how to build a simple
 - [Unity NURBS](https://github.com/komietty/unity-nurbs) (Already bundles in `Libraries` folder)
 
 Older versions should also work, I just didn't test it.
+
+## Changelog
+### v1.1
++ NURBS splines
++ NoLimits 2 track importing
++ Train and track audio
++ Track supports generation
+
++ improved editor performance 
++ Automatic generation of sensor events for block sections

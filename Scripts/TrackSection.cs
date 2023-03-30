@@ -298,6 +298,9 @@ namespace Rollercoaster
                 if (!trackMeshObject)
                     trackMeshObject = this.transform.Find("Track Mesh")?.gameObject;
 
+                if (trackMeshObject)
+                    return;
+
                 Gizmos.color = TrackDesc.TrackGizmoColor;
                 Gizmos.matrix = this.transform.localToWorldMatrix;
 
@@ -331,15 +334,14 @@ namespace Rollercoaster
                     float3 p4 = p0 - mul(r0, float3(TrackDesc.TrackWidth * 0.5f, 0, 0));
                     float3 p5 = p0 + mul(r0, float3(TrackDesc.TrackWidth * 0.5f, 0, 0));
 
-                    if (!trackMeshObject)
-                    {
-                        //Left and right tracks
-                        Gizmos.DrawLine(p4, p2);
-                        Gizmos.DrawLine(p5, p3);
 
-                        //Center
-                        Gizmos.DrawLine(0.5f * (p2 + p4), 0.5f * (p3 + p5));
-                    }
+                    //Left and right tracks
+                    Gizmos.DrawLine(p4, p2);
+                    Gizmos.DrawLine(p5, p3);
+
+                    //Center
+                    Gizmos.DrawLine(0.5f * (p2 + p4), 0.5f * (p3 + p5));
+                    
 
                     //Heartline
                     Gizmos.DrawLine(p0 + mul(r0, float3(0, TrackDesc.HeartlineOffset, 0)), p1 + mul(r1, float3(0, TrackDesc.HeartlineOffset, 0)));

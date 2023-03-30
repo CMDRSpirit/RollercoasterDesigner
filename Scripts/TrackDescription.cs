@@ -62,6 +62,7 @@ namespace Rollercoaster
             trackMeshObj.transform.parent = section.transform;
             trackMeshObj.transform.localPosition = Vector3.zero;
             trackMeshObj.transform.localRotation = Quaternion.identity;
+            trackMeshObj.isStatic = true;
 
             //Generate Mesh
             int[] bi = TrackMesh.GetIndices(0);
@@ -134,7 +135,7 @@ namespace Rollercoaster
 
             MeshRenderer renderer = trackMeshObj.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = section.TrackMaterial;
-
+            renderer.receiveGI = ReceiveGI.LightProbes;
 
             //Add objects
             if (TrackObjects != null)
