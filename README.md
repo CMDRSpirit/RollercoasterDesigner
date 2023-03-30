@@ -40,7 +40,7 @@ The [Wiki](https://github.com/CMDRSpirit/RollercoasterDesigner/wiki) contains in
 - Unity.Mathematics 1.2.x+
 - Unity.Cinemachine 2.8.x+ (Only used by the example scene)
 - HDRP 13+ (Only used by example materials)
-- [Unity NURBS](https://github.com/komietty/unity-nurbs) (Already bundles in `Libraries` folder)
+- [Unity NURBS](https://github.com/komietty/unity-nurbs) (Already bundled in `Libraries` folder)
 
 Older versions should also work, I just didn't test it.
 
@@ -51,6 +51,7 @@ Additions:
 - NoLimits 2 track importing
 - Train and track audio
 - Track supports generation
+- Needs [Unity NURBS](https://github.com/komietty/unity-nurbs) from now on
 
 Improvements:
 - Editor performance 
