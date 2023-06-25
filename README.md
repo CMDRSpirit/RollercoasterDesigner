@@ -13,7 +13,9 @@ A toolset for creating and operating realistic rollercoasters in Unity. Includes
 The [Wiki](https://github.com/CMDRSpirit/RollercoasterDesigner/wiki) contains information about how the toolset works, how to build a simple rollercoaster and importing NoLimits 2 tracks.
 
 ## Example Coasters
-- Expedition Geforce Recreation (Holiday Park): Coming soon
+- Expedition Geforce Recreation (Holiday Park)
+
+Download Location: https://github.com/CMDRSpirit/RollercoasterDesigner/releases
 
 ## Features
 - Spline based track editor
