@@ -46,7 +46,7 @@ namespace Rollercoaster
 
         private void Awake()
         {
-
+            CombineSections();
         }
 
         private void OnValidate()
@@ -174,7 +174,9 @@ namespace Rollercoaster
 
             sec.UpdateSpline();
 
+#if UNITY_EDITOR
             Undo.RegisterCreatedObjectUndo(obj, "Create Track Section");
+#endif
 
             if (index != -1)
                 TrackSections.Insert(index, sec);
@@ -189,9 +191,12 @@ namespace Rollercoaster
         public void RemoveSection(int index)
         {
             //GameObject.DestroyImmediate(TrackSections[index].gameObject);
+#if UNITY_EDITOR
             Undo.DestroyObjectImmediate(TrackSections[index].gameObject);
 
             Undo.RecordObject(this, "Remove Track Section");
+#endif
+
             TrackSections.RemoveAt(index);
 
             CombineSections();

@@ -141,7 +141,7 @@ namespace Rollercoaster
             float t_local;
             var sec = train.Track.GetSection(train.t_global, out t_local);
             var aud = sec.GetComponent<TrackAudio>();
-            var paud = prevSec?.GetComponent<TrackAudio>();
+            //var paud = prevSec?.GetComponent<TrackAudio>();
             if (prevSec != sec)
             {
                 createTrackSources(aud);

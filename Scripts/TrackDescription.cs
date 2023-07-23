@@ -135,7 +135,9 @@ namespace Rollercoaster
 
             MeshRenderer renderer = trackMeshObj.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = section.TrackMaterial;
+#if UNITY_EDITOR
             renderer.receiveGI = ReceiveGI.LightProbes;
+#endif
 
             //Add objects
             if (TrackObjects != null)

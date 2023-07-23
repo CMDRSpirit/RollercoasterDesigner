@@ -103,7 +103,10 @@ namespace Rollercoaster
             if (!Track)
                 return;
 
-            t_global = (t_global + Track.TMax) % Track.TMax;
+            if (Track.TMax != 0)
+                t_global = (t_global + Track.TMax) % Track.TMax;
+            else
+                t_global = 0;
 
             float t_local;
             var sec = Track.GetSection(t_global, out t_local);
