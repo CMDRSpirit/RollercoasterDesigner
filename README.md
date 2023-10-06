@@ -40,6 +40,7 @@ Download Location: https://github.com/CMDRSpirit/RollercoasterDesigner/releases
 ## Requirements
 - Unity 2022.1+
 - Unity.Mathematics 1.2.x+
+- Unity.Burst 1.7.4+
 - Unity.Cinemachine 2.8.x+ (Only used by the example scene)
 - HDRP 13+ (Only used by example materials)
 - [Unity NURBS](https://github.com/komietty/unity-nurbs) (Already bundled in `Libraries` folder)
